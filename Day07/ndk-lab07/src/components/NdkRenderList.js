@@ -1,17 +1,24 @@
 import React from 'react'
 
 export default function NdkRenderList() {
-    const ndkNames = ["Khánh", "Đạt", "Tuấn", "Thông"];
+    const ndkList = ["Trịnh Chung", "ReactJS","Fit-NTU"];
 
-    // Hiển thị giá trị của mảng
-    const ndkElementName = ndkNames.map((item) => {
+    const ndkElement = ndkList.map(item=>{
         return <li>{item}</li>
     })
-    return (
-        <div>
-            <h2>Danh sách các siêu anh hùng Truyền Thuyết
-            </h2>
-            {ndkElementName}
-        </div>
-    )
+
+  return (
+    <div className='alert alert-success'>
+        <h2> Danh sách:</h2>
+        <ul>
+            {
+                ndkList.map(item=>{
+                    return <li>{item}</li>
+                })
+            }
+        </ul>
+        <hr/>
+        {ndkElement}
+    </div>
+  )
 }
