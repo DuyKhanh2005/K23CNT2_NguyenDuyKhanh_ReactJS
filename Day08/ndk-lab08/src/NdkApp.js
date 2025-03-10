@@ -13,7 +13,7 @@ class NdkApp extends Component {
         { ndkId: "SV003", ndkStudentName: "Phạm Tuấn Anh", ndkAge: 20, ndkGender: "Nam", ndkBirthday: "25/05/2005", ndkBirthPlace: "TpHCM", ndkAddress: "Trung Quốc" },
         { ndkId: "SV004", ndkStudentName: "Phạm Thị Quỳnh Hương", ndkAge: 20, ndkGender: "Nữ", ndkBirthday: "01/01/2005", ndkBirthPlace: "TpHCM", ndkAddress: "Hồ Chí Minh" },
       ],
-      ndkStudent: "", // Sinh viên đang được chỉnh sửa
+      ndkStudent: null, // Sinh viên đang được xem hoặc sửa
       searchKeyword: "", // Từ khóa tìm kiếm
     };
   }
@@ -35,11 +35,9 @@ class NdkApp extends Component {
     const index = ndkStudents.findIndex(student => student.ndkId === ndkStudent.ndkId);
 
     if (index !== -1) {
-      // Cập nhật thông tin sinh viên
-      ndkStudents[index] = ndkStudent;
+      ndkStudents[index] = ndkStudent; // Cập nhật
     } else {
-      // Thêm mới sinh viên
-      ndkStudents.push(ndkStudent);
+      ndkStudents.push(ndkStudent); // Thêm mới
     }
 
     this.setState({
