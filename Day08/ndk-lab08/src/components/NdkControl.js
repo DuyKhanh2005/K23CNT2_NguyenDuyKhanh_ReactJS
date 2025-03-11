@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
 class NdkControl extends Component {
   constructor(props) {
@@ -13,12 +13,12 @@ class NdkControl extends Component {
   handleSearchChange = (event) => {
     const keyword = event.target.value;
     this.setState({ searchKeyword: keyword });
-    this.props.onNdkHandleSearch(keyword); // Gửi lên NdkApp.js
+    this.props.onNdkHandleSearch(keyword);
   };
 
-  // Xử lý khi nhấn nút "Sửa"
+  // Nhận sinh viên cần sửa từ component cha
   handleEditStudent = (student) => {
-    this.setState({ editingStudent: student }); // Cập nhật state để hiển thị form sửa
+    this.setState({ editingStudent: { ...student } });
   };
 
   // Cập nhật giá trị trong form chỉnh sửa
@@ -44,36 +44,22 @@ class NdkControl extends Component {
     return (
       <div className="card-header">
         <div className="row">
-          {/* Thêm mới sinh viên */}
-          <div className="col-3">
-            <button
-              type="button"
-              className="btn btn-primary"
-              onClick={this.props.onNdkHandleAddNew} // Kích hoạt sự kiện thêm mới
-            >
-              Thêm mới sinh viên
+          {/* Ô tìm kiếm + Nút tìm kiếm cùng hàng */}
+          <div className="col-8 d-flex">
+            <input
+              type="search"
+              className="form-control me-2"
+              placeholder="Nhập mã sinh viên..."
+              value={this.state.searchKeyword}
+              onChange={this.handleSearchChange}
+            />
+            <button type="button" className="btn btn-primary">
+              🔍
             </button>
           </div>
 
-          {/* Ô tìm kiếm */}
-          <div className="col-6">
-            <form className="search-form">
-              <i className="icon-search" />
-              <input
-                type="search"
-                className="form-control"
-                placeholder="Nhập mã sinh viên..."
-                value={this.state.searchKeyword}
-                onChange={this.handleSearchChange}
-              />
-              <button type="button" className="btn btn-primary">
-                Tìm kiếm
-              </button>
-            </form>
-          </div>
-
-          {/* Sắp xếp danh sách (chưa có logic) */}
-          <div className="col-3">
+          {/* Sắp xếp danh sách */}
+          <div className="col-4">
             <select className="form-control">
               <option value="">Sắp xếp</option>
               <option value="name_asc">Tên A-Z</option>
@@ -82,16 +68,16 @@ class NdkControl extends Component {
           </div>
         </div>
 
-        {/* Hiển thị form chỉnh sửa nếu có sinh viên đang sửa */}
+        {/* Form chỉnh sửa sinh viên */}
         {this.state.editingStudent && (
           <div className="edit-form mt-3">
             <h4>Chỉnh sửa sinh viên</h4>
             <input
               type="text"
-              name="name"
+              name="ndkStudentName"
               className="form-control"
               placeholder="Nhập tên sinh viên..."
-              value={this.state.editingStudent.name}
+              value={this.state.editingStudent.ndkStudentName}
               onChange={this.handleEditChange}
             />
             <button className="btn btn-success mt-2" onClick={this.handleUpdateStudent}>
