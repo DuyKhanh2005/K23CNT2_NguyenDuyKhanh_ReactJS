@@ -1,0 +1,64 @@
+/* Định dạng bảng */
+.ndk-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.ndk-table th,
+.ndk-table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.ndk-table th {
+    background-color: #007bff;
+    color: white;
+    text-transform: uppercase;
+}
+
+.ndk-table tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.ndk-table tbody tr:hover {
+    background-color: #ddd;
+}
+
+/* Nút */
+.ndk-btn {
+    padding: 5px 10px;
+    margin: 2px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.ndk-btn-edit {
+    background-color: #ffc107;
+    color: black;
+}
+
+.ndk-btn-delete {
+    background-color: #dc3545;
+    color: white;
+}
+
+/* Trạng thái hoạt động */
+.ndk-status-active {
+    background-color: #28a745;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 15px;
+}
+
+.ndk-status-inactive {
+    background-color: #dc3545;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 15px;
+}

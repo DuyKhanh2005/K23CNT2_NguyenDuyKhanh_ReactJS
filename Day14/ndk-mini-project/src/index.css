@@ -1,0 +1,16 @@
+.ndk-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.ndk-table th,
+.ndk-table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+}
+
+.ndk-table th {
+  background-color: #f4f4f4;
+}
