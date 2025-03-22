@@ -1,55 +1,66 @@
 import { useEffect, useState } from "react";
-import { getUsers, deleteUser } from "../api/mockapi";
 import { Link } from "react-router-dom";
+import axios from "axios";
+
+const API_URL = "https://67da139035c87309f52ad943.mockapi.io/k23cnt2_nguyenduykhanh/ndk_users";
 
 const NdkListUsers = () => {
     const [users, setUsers] = useState([]);
-    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const fetchUsers = async () => {
-            const data = await getUsers();
-            setUsers(data);
-            setLoading(false);
-        };
-        fetchUsers();
+        axios.get(API_URL)
+            .then((response) => {
+                setUsers(response.data);
+            })
+            .catch((error) => console.error("Lỗi khi lấy dữ liệu:", error));
     }, []);
 
+    // Hàm xóa user
     const handleDelete = async (id) => {
-        await deleteUser(id);
-        setUsers((prevUsers) => prevUsers.filter((user) => user.id !== id));
+        if (window.confirm("Bạn có chắc chắn muốn xóa người dùng này?")) {
+            try {
+                await axios.delete(`${API_URL}/${id}`);
+                setUsers(users.filter(user => user.id !== id));
+            } catch (error) {
+                console.error("Lỗi khi xóa user:", error);
+            }
+        }
     };
 
     return (
         <div>
-            <h2>Danh sách User</h2>
-            {loading ? <p>Đang tải dữ liệu...</p> : users.length === 0 ? <p>Không có dữ liệu</p> :
-                <table border="1">
-                    <thead>
-                        <tr>
-                            <th>Họ và tên</th>
-                            <th>Email</th>
-                            <th>Điện thoại</th>
-                            <th>Hoạt động</th>
-                            <th>Hành động</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {users.map((user) => (
+            <h2>Danh sách Users</h2>
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Họ và Tên</th>
+                        <th>Email</th>
+                        <th>Số Điện Thoại</th>
+                        <th>Hành động</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {users.length > 0 ? (
+                        users.map((user) => (
                             <tr key={user.id}>
-                                <td>{user.ndk_name}</td>
-                                <td>{user.ndk_email}</td>
-                                <td>{user.ndk_phone}</td>
-                                <td>{user.ndk_active ? "Hoạt động" : "Bị khóa"}</td>
+                                <td>{user.id}</td>
+                                <td>{user.ndkFullname || user.ndk_name}</td>
+                                <td>{user.ndkEmail || user.ndk_email}</td>
+                                <td>{user.ndkPhone || user.ndk_phone}</td>
                                 <td>
-                                    <Link to={`/edit-user/${user.id}`}>Sửa</Link>
-                                    <button onClick={() => handleDelete(user.id)}>Xóa</button>
+                                    <Link to={`/edit-user/${user.id}`} className="edit-btn">✏️ Sửa</Link>
+                                    <button onClick={() => handleDelete(user.id)} className="delete-btn">🗑️ Xóa</button>
                                 </td>
                             </tr>
-                        ))}
-                    </tbody>
-                </table>
-            }
+                        ))
+                    ) : (
+                        <tr>
+                            <td colSpan="5">Không có user nào!</td>
+                        </tr>
+                    )}
+                </tbody>
+            </table>
         </div>
     );
 };

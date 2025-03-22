@@ -1,38 +1,226 @@
-.App {
-  text-align: center;
+/* === RESET DEFAULT === */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+:root {
+  --primary-color: #6a0dad;
+  --secondary-color: #4caf50;
+  --background-color: #e3e6f0;
+  --text-color: #222;
+  --nav-bg: #5c0dac;
+  --nav-hover: #8833ff;
+  --table-header: #6a0dad;
+  --button-primary: #6a0dad;
+  --button-danger: #d32f2f;
+  --button-warning: #fbc02d;
+  --title-bg: #f3ebff;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  padding: 40px;
+  max-width: 1200px;
+  margin: auto;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* === NAVIGATION === */
+nav {
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  background: var(--nav-bg);
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 12px 20px;
+  margin: 0 10px;
+  border-radius: 6px;
+  transition: 0.3s;
+}
+
+nav a:hover {
+  background: var(--nav-hover);
+}
+
+/* === HEADINGS === */
+h1,
+h2 {
+  text-align: center;
+  font-weight: 600;
+  background: var(--title-bg);
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out, color 0.3s;
+}
+
+h1 {
+  font-size: 32px;
+  color: var(--primary-color);
+  margin-bottom: 15px;
+}
+
+h2 {
+  font-size: 24px;
+  color: var(--secondary-color);
+  margin-bottom: 25px;
+}
+
+h1:hover,
+h2:hover {
+  transform: scale(1.05);
+  color: #8833ff;
+}
+
+/* === TABLE === */
+.table-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+table {
+  width: 100%;
+  max-width: 1000px;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+th,
+td {
+  padding: 20px;
+  text-align: center;
+  border: 1px solid #ddd;
+  font-size: 16px;
+}
+
+th {
+  background: var(--table-header);
+  color: white;
+  font-weight: bold;
+}
+
+tbody tr:nth-child(even) {
+  background: #f8f8f8;
+}
+
+tbody tr:hover {
+  background: #e6e6e6;
+  transition: 0.3s;
+}
+
+/* === BUTTONS === */
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+button {
+  padding: 14px 20px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+  color: white;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.add-btn {
+  background: var(--secondary-color);
+}
+
+.edit-btn {
+  background: var(--button-warning);
+}
+
+.delete-btn {
+  background: var(--button-danger);
+}
+
+button:hover {
+  opacity: 0.85;
+  transform: scale(1.05);
+}
+
+/* === FORM === */
+form {
+  max-width: 500px;
+  margin: auto;
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+form label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 6px;
+}
+
+form input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+
+form button {
+  width: 100%;
+  background: var(--button-primary);
+  color: white;
+  font-size: 18px;
+}
+
+form button:hover {
+  background: #4a0b8c;
+}
+
+.edit-btn,
+.delete-btn {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+  margin: 5px;
+  display: inline-block;
+  text-decoration: none;
+}
+
+.edit-btn {
+  background: #fbc02d;
+  color: black;
+}
+
+.delete-btn {
+  background: #d32f2f;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.edit-btn:hover,
+.delete-btn:hover {
+  opacity: 0.8;
 }

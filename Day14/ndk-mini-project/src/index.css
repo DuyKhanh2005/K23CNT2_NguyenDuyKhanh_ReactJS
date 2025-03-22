@@ -1,16 +1,25 @@
-.ndk-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 20px;
+/* Reset toàn bộ mặc định trình duyệt */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Arial', sans-serif;
 }
 
-.ndk-table th,
-.ndk-table td {
-  border: 1px solid #ddd;
-  padding: 10px;
-  text-align: left;
-}
-
-.ndk-table th {
+/* Căn giữa ứng dụng */
+body {
   background-color: #f4f4f4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.container {
+  width: 90%;
+  max-width: 1000px;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }

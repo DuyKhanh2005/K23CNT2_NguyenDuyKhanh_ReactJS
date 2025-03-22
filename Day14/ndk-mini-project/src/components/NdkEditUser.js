@@ -1,38 +1,65 @@
-import { useState, useEffect } from "react";
-import { getUserById, updateUser } from "../api/mockapi";
-import { useNavigate, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import axios from "axios";
+
+const API_URL = "https://67da139035c87309f52ad943.mockapi.io/k23cnt2_nguyenduykhanh/ndk_users";
 
 const NdkEditUser = () => {
-    const [user, setUser] = useState({ ndk_name: "", ndk_email: "", ndk_phone: "", ndk_active: false });
-    const navigate = useNavigate();
     const { id } = useParams();
+    const navigate = useNavigate();
+    const [user, setUser] = useState({
+        ndkFullname: "",
+        ndkEmail: "",
+        ndkPhone: "",
+    });
 
     useEffect(() => {
-        getUserById(id).then((response) => setUser(response.data));
+        axios.get(`${API_URL}/${id}`)
+            .then((response) => setUser(response.data))
+            .catch((error) => console.error("Lỗi khi lấy user:", error));
     }, [id]);
 
-    const handleChange = (e) => {
-        const { name, value, type, checked } = e.target;
-        setUser({ ...user, [name]: type === "checkbox" ? checked : value });
-    };
-
-    const handleSubmit = (e) => {
+    // Hàm cập nhật user
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        updateUser(id, user).then(() => navigate("/list-user"));
+        try {
+            await axios.put(`${API_URL}/${id}`, user);
+            alert("Cập nhật thành công!");
+            navigate("/users");
+        } catch (error) {
+            console.error("Lỗi khi cập nhật user:", error);
+        }
     };
 
     return (
         <div>
-            <h2>Sửa thông tin User</h2>
+            <h2>Chỉnh sửa User</h2>
             <form onSubmit={handleSubmit}>
-                <input name="ndk_name" value={user.ndk_name} onChange={handleChange} required />
-                <input name="ndk_email" type="email" value={user.ndk_email} onChange={handleChange} required />
-                <input name="ndk_phone" value={user.ndk_phone} onChange={handleChange} required />
-                <label>
-                    <input type="checkbox" name="ndk_active" checked={user.ndk_active} onChange={handleChange} />
-                    Hoạt động
-                </label>
-                <button type="submit">Cập nhật</button>
+                <label>Họ và Tên:</label>
+                <input
+                    type="text"
+                    value={user.ndkFullname}
+                    onChange={(e) => setUser({ ...user, ndkFullname: e.target.value })}
+                    required
+                />
+
+                <label>Email:</label>
+                <input
+                    type="email"
+                    value={user.ndkEmail}
+                    onChange={(e) => setUser({ ...user, ndkEmail: e.target.value })}
+                    required
+                />
+
+                <label>Số Điện Thoại:</label>
+                <input
+                    type="text"
+                    value={user.ndkPhone}
+                    onChange={(e) => setUser({ ...user, ndkPhone: e.target.value })}
+                    required
+                />
+
+                <button type="submit">💾 Lưu</button>
             </form>
         </div>
     );

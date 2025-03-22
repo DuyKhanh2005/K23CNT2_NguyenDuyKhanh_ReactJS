@@ -4,6 +4,8 @@ import { BrowserRouter } from "react-router-dom";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import NdkApp from "./NdkApp";
+import "./App.css";
+
 
 const ndkRoot = ReactDOM.createRoot(document.getElementById("ndkRoot"));
 ndkRoot.render(

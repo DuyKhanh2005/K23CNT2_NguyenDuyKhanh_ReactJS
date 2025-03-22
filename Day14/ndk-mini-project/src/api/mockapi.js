@@ -1,18 +1,25 @@
 import axios from "axios";
 
-const API_URL = "https://67da139035c87309f52ad943.mockapi.io/k23cnt2_nguyenduykhanh/ndk_users"; // Kiểm tra URL
+const API_URL = "https://67da139035c87309f52ad943.mockapi.io/k23cnt2_nguyenduykhanh/ndk_users";
 
-export const getUsers = async () => {
+// Hàm gọi API với phương thức động (GET, POST, PUT, DELETE)
+const apiRequest = async (method, endpoint = "", data = null) => {
     try {
-        const response = await axios.get(API_URL);
+        const response = await axios({
+            method,
+            url: `${API_URL}/${endpoint}`,
+            data,
+        });
         return response.data;
     } catch (error) {
-        console.error("Lỗi khi lấy dữ liệu users:", error);
-        return [];
+        console.error(`Lỗi ${method} dữ liệu:`, error);
+        return method === "GET" ? [] : null; // Trả về mảng rỗng cho GET, null cho các phương thức khác
     }
 };
 
-export const getUserById = (id) => axios.get(`${API_URL}/${id}`);
-export const createUser = (user) => axios.post(API_URL, user);
-export const updateUser = (id, user) => axios.put(`${API_URL}/${id}`, user);
-export const deleteUser = (id) => axios.delete(`${API_URL}/${id}`);
+// Các hàm API sử dụng apiRequest
+export const getUsers = () => apiRequest("GET");
+export const getUserById = (id) => apiRequest("GET", id);
+export const createUser = (user) => apiRequest("POST", "", user);
+export const updateUser = (id, user) => apiRequest("PUT", id, user);
+export const deleteUser = (id) => apiRequest("DELETE", id);

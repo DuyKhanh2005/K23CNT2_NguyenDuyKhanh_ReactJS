@@ -1,11 +1,18 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import "../App.css";
 
 const NdkNavBar = () => {
     return (
-        <nav>
-            <Link to="/">Trang chủ</Link> |
-            <Link to="/list-user">Danh sách User</Link> |
-            <Link to="/create-user">Thêm User</Link>
+        <nav className="navbar">
+            <NavLink to="/" className={({ isActive }) => (isActive ? "active" : "")}>
+                🏠 Trang chủ
+            </NavLink>
+            <NavLink to="/list-user" className={({ isActive }) => (isActive ? "active" : "")}>
+                📋 Danh sách User
+            </NavLink>
+            <NavLink to="/create-user" className={({ isActive }) => (isActive ? "active" : "")}>
+                ➕ Thêm User
+            </NavLink>
         </nav>
     );
 };
